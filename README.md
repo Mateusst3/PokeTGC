@@ -31,4 +31,4 @@ Para salvar os decks do usuário, foi utilizado o localStorage, onde foi salvo o
 
 ## Funcionalidades
 
-No gerenciador de pokemons, é possível Criar Decks, visualizar Decks, renomear Decks, excluir Decks, procurar cartas, favoritar cartas e diversas outras funções.
+No gerenciador de pokemons, é possível Criar Decks, visualizar Decks, renomear Decks, excluir Decks, procurar cartas, favoritar cartas e diversas outras funções. Foi adicionado fontes personalizadas para uma personalização maior do projeto.
