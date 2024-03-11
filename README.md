@@ -21,10 +21,10 @@ Um simples gerenciador de Pokemons desenvolvido com a versão 17 Do Angular
       ng serve
     ```
 
-##Api Utilizada
+## Api Utilizada
 
 Foi utilizada a API Pokemon TCG para pegar os dados (https://pokemontcg.io/)
 
-##Manipulação de decks por usuário e arquitetura
+## Manipulação de decks por usuário e arquitetura
 
 Para salvar os decks do usuário, foi utilizado o localStorage, onde foi salvo o Array de decks do usuário. A arquitetura utilizada foi baseada em componentes, assim aproveitando ao máximo a última versão do Angular.
