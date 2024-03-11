@@ -6,7 +6,7 @@ Um simples gerenciador de Pokemons desenvolvido com a versão 17 Do Angular.
 
 1. Instalar [Node.js](http://nodejs.org)
 
-2. Clonar o repositório
+3. Clonar o repositório
     ```bash
       git clone https://github.com/Mateusst3/PokeTGC.git
     ```
@@ -16,7 +16,12 @@ Um simples gerenciador de Pokemons desenvolvido com a versão 17 Do Angular.
       npm install
     ```
 
-4. Iniciar o servidor
+4. Instalar o Angular CLI
+    ```bash
+      npm install @angular/cli
+    ```
+
+5. Iniciar o servidor
    ```bash
       ng serve
     ```
