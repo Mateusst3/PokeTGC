@@ -1,0 +1,126 @@
+<main
+  class="flex flex-col items-center justiffy-center h-full w-full py-12 gap-6"
+>
+  <section
+    class="flex flex-col items-center justify-center gap-2 w-full font-semibold"
+  >
+    <h4 class="text-xl pokemon-font-thin text-pokemonBlue-main">
+      Selecione o nome do seu baralho!
+    </h4>
+    <div class="flex flex-row gap-3 items-center justify-center">
+      <input
+        type="text"
+        class="border-2 disabled:bg-gray-300 disabled:cursor-not-allowed border-pokemonYellow-light rounded-lg py-3 px-4 text-pokemonBlue-main"
+        placeholder="Insira o nome..."
+        (keyup)="onInputMsg($event)"
+        [disabled]="this.nameSelected"
+      />
+      <button
+        (mouseenter)="isHovering = true"
+        (mouseleave)="isHovering = false"
+        (click)="selectName()"
+        [disabled]="this.nameSelected"
+        [ngClass]="isHovering ? 'bg-green-500' : 'bg-white'"
+        class="disabled:cursor-not-allowed gap-3 py-2 px-3 transition flex flex-row items-center justify-center rounded-full"
+      >
+        <igx-icon
+          class="text-3xl"
+          [ngClass]="isHovering ? 'text-white' : 'text-green-500'"
+          >check</igx-icon
+        >
+      </button>
+    </div>
+  </section>
+  @if (nameSelected) {
+  <section class="flex flex-col items-center justify-center">
+    <h4 class="text-xl pokemon-font-thin text-pokemonBlue-main py-3">
+      Certo! Agora selecione as suas cartas!
+    </h4>
+    <div class="flex flex-row items-center justify-center gap-3">
+      <button (click)="changeMode('list')">
+        <igx-icon
+          class="text-3xl text-pokemonYellow-dark hover:text-pokemonYellow-light transition"
+          >list</igx-icon
+        >
+      </button>
+      <button (click)="changeMode('search')">
+        <igx-icon
+          class="text-3xl text-pokemonYellow-dark hover:text-pokemonYellow-light transition"
+          >search</igx-icon
+        >
+      </button>
+    </div>
+  </section>
+
+  @if(isListSelected){
+  <div
+    class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 max-w-screen h-auto"
+  >
+    @for (item of pokemonCardsProp; track item) {
+    <app-pokemon-card
+      [cardData]="item"
+      [isSelectCard]="true"
+      [add2Arr]="addSelectedCards"
+    >
+    </app-pokemon-card>
+    }
+  </div>
+  <div class="flex flex-row items-center justify-center py-4">
+    @if (isFetching) {
+    <igx-circular-bar [value]="100" [animate]="true"></igx-circular-bar>
+    } @else {
+    <button
+      (click)="changeLimit()"
+      class="flex items-center justify-center py-3 px-4 gap-5 text-center text-xl border-[3px] hover:border-4 hover:shadow-lg transition rounded-xl uppercase border-pokemonBlue-main text-pokemonBlue-main"
+    >
+      Carregar Mais
+    </button>
+    }
+  </div>
+  } @else {
+  <section
+    class="flex flex-col items-center justify-center gap-2 w-full font-semibold"
+  >
+    <h4 class="text-xl pokemon-font-thin text-pokemonBlue-main">
+      Procure pelo nome do pokemon que você desejar!
+    </h4>
+    <div class="flex flex-row gap-3 items-center justify-center">
+      <input
+        type="text"
+        class="border-2 disabled:bg-gray-300 disabled:cursor-not-allowed border-pokemonYellow-light rounded-lg py-3 px-4 text-pokemonBlue-main"
+        placeholder="Insira o nome..."
+        (keyup)="searchCard($event)"
+      />
+    </div>
+    @if (isFetching) {
+    <igx-circular-bar [value]="100" [animate]="true"></igx-circular-bar>
+    }
+  </section>
+
+  <div
+    class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 max-w-screen h-auto"
+  >
+    @for (item of pokemonCardsSearch; track item) {
+    <app-pokemon-card
+      [cardData]="item"
+      [isSelectCard]="true"
+      [add2Arr]="addSelectedCards"
+    >
+    </app-pokemon-card>
+    }
+  </div>
+  } } @if (selectedCards.length > 0) {
+  <app-selected-cards [selectedCards]="selectedCards"></app-selected-cards>
+  <button
+    (click)="createDeck()"
+    [disabled]="
+      this.selectedCards.length < 24 ||
+      this.selectedCards.length > 60 ||
+      !this.nameSelected
+    "
+    class="flex items-center justify-center py-3 px-4 gap-5 text-center text-xl border-[3px] hover:border-4 hover:shadow-lg transition rounded-xl uppercase border-pokemonBlue-main text-pokemonBlue-main bottom-2 left-3 fixed disabled:bg-gray-300 disabled:cursor-not-allowed"
+  >
+    Criar baralho
+  </button>
+  }
+</main>

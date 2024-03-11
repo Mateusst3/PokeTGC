@@ -1,0 +1,19 @@
+<div class="flex flex-row items-center justify-center w-full h-full">
+  @if (decks && decks.length > 0) { @for (item of decks; track decks) {
+  <div>{{ item.name }}</div>
+  } } @else {
+  <div class="w-full h-full gap-10 flex flex-col items-center justify-center">
+    <h3
+      class="pokemon-font-thin w-full text-center text-5xl text-pokemonBlue-main font-bold"
+    >
+      Você ainda não tem nenhum deck!
+    </h3>
+    <button
+      (click)="createDeck()"
+      class="flex items-center justify-center py-3 px-4 gap-5 text-center text-xl border-[3px] hover:border-4 hover:shadow-lg transition rounded-xl uppercase border-pokemonBlue-main text-pokemonBlue-main hover:bg-pokemonYellow-light"
+    >
+      Criar Deck!
+    </button>
+  </div>
+  }
+</div>

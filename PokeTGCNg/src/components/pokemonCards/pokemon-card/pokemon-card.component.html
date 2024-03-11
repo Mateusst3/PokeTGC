@@ -1,0 +1,39 @@
+<div class="flex flex-col items-center py-3 h-auto">
+  <div
+    class="relative"
+    (mouseenter)="isHovering = true"
+    (mouseleave)="isHovering = false"
+  >
+    @if ( isSelectCard && add2Arr ) {
+    <div class="flex flex-row items-center justify-center gap-1 absolute top-4 left-3">
+      <input
+        type="checkbox"
+        class="h-6 w-6"
+        (change)="checked = !checked; add2Arr(cardData, false)"
+      />
+      @if (checked) {
+      <button (click)="add2Arr(cardData, true)" class="font-bold text-3xl">
+        +
+      </button>
+      }
+    </div>
+    }
+    <button
+      igxButton="icon"
+      class="absolute top-4 right-3"
+      [ngClass]="isHovering ? 'block' : 'hidden'"
+      (click)="isFavorite ? removeFromFavorite() : putOnFavorite()"
+    >
+      <igx-icon
+        class="text-3xl"
+        [ngClass]="isFavorite ? 'text-pokemonRed-light' : 'text-white'"
+        >favorite</igx-icon
+      >
+    </button>
+    <img
+      src="{{ cardData.images.small }}"
+      alt="pokemon-{{ cardData.name }}"
+      class="w-auto h-auto min-h-[350px] hover:border-4 hover:border-pokemonRed-dark rounded-2xl hover:shadow-shadowCard cursor-pointer transition-all"
+    />
+  </div>
+</div>

@@ -1,0 +1,40 @@
+@use "igniteui-angular/theming" as *;
+// Uncomment the following lines if you want to add a custom palette:
+// $primary: #731963 !default;
+// $secondary: #ce5712 !default;
+// $app-palette: palette($primary, $secondary, $surface);
+
+/* autoprefixer grid: on */
+
+@include core();
+// @include typography(
+// //   $font-family: $material-typeface,
+//   $type-scale: $material-type-scale
+// );
+// CSS Reset, comment out if not required or using a different module
+@import "minireset.css/minireset";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* You can add global styles to this file, and also import other style files */
+
+@font-face {
+    font-family: "Pokemon-thin";
+    src: url('assets/fonts/PokemonFont/PokemonHollow.ttf') format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Pokemon-solid";
+    src: url('assets/fonts/PokemonFont/PokemonSolid.ttf') format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.pokemon-font-solid {
+  font-family: "Pokemon-solid";
+}
+
+.pokemon-font-thin {
+    font-family: "Pokemon-thin";
+  }

@@ -1,0 +1,64 @@
+<main class="h-screen w-auto flex flex-col py-4 gap-6">
+    <div
+      class="flex flex-col md:flex-row items-center justify-center text-center w-full gap-3 min-h-[200px]"
+    >
+      <button
+        (click)="changeSelectedBtn('cards')"
+        [ngClass]="isCardsList ? 'bg-pokemonYellow-light' : 'bg-white'"
+        class="px-5 pt-2 pb-5 border-[3px] hover:border-[6px] hover:shadow-shadowCard transition border-pokemonBlue-main rounded-[3rem] flex flex-row items-center justify-center"
+      >
+        <p
+          class="pokemon-font-thin w-full text-center text-5xl text-pokemonBlue-main font-bold"
+        >
+          Lista de Cartas
+        </p>
+      </button>
+      <button
+        (click)="changeSelectedBtn('deck')"
+        [ngClass]="isMyDeck ? 'bg-pokemonYellow-light' : 'bg-white'"
+        class="px-5 pt-2 pb-5 border-[3px] hover:border-[6px] hover:shadow-shadowCard transition border-pokemonBlue-main rounded-[3rem] flex flex-row items-center justify-center"
+      >
+        <p
+          class="pokemon-font-thin w-full text-center text-5xl text-pokemonBlue-main font-bold"
+        >
+          Meus Baralhos
+        </p>
+      </button>
+      <button
+        (click)="changeSelectedBtn('favorites')"
+        [ngClass]="isFavoritesPokemons ? 'bg-pokemonYellow-light' : 'bg-white'"
+        class="px-5 pt-2 pb-5 border-[3px] hover:border-[6px] hover:shadow-shadowCard transition border-pokemonBlue-main rounded-[3rem] flex flex-row items-center justify-center"
+      >
+        <p
+          class="pokemon-font-thin w-full text-center text-5xl text-pokemonBlue-main font-bold"
+        >
+          Pokemons favoritos
+        </p>
+      </button>
+    </div>
+    @if (pokemonCardsProp) { @if (isCardsList) {
+    <div
+      class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 max-w-screen h-auto"
+    >
+      @for (item of pokemonCardsProp; track item) {
+      <app-pokemon-card [cardData]="item" [isSelectCard]="false"> </app-pokemon-card>
+      }
+    </div>
+    <div class="flex flex-row items-center justify-center py-4">
+      @if (isFetching) {
+      <igx-circular-bar [value]="100" [animate]="true"></igx-circular-bar>
+      } @else {
+      <button
+        (click)="changeLimit()"
+        class="flex items-center justify-center py-3 px-4 gap-5 text-center text-xl border-[3px] hover:border-4 hover:shadow-lg transition rounded-xl uppercase border-pokemonBlue-main text-pokemonBlue-main"
+      >
+        Carregar Mais
+      </button>
+      }
+    </div>
+    }@else if (isMyDeck) {
+    <app-decks></app-decks>
+    } @else {
+    <app-favorites-pokemons> </app-favorites-pokemons>
+    } }
+  </main>
