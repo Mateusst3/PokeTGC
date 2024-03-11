@@ -13,6 +13,7 @@ import { get } from '../../../utils/ApiFetch';
 import { PokemonCardComponent } from '../../pokemonCards/pokemon-card/pokemon-card.component';
 import { SelectedCardsComponent } from '../../selectedCards/selected-cards/selected-cards.component';
 import { DeckInterface } from '../../../types/interfaces/DeckInterface';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-deck',
@@ -32,7 +33,7 @@ import { DeckInterface } from '../../../types/interfaces/DeckInterface';
 })
 export class CreateDeckComponent implements OnInit {
   isHovering: boolean = false;
-  inputName: string = '';
+  inputName: string;
   nameSelected: string | null = null;
   isListSelected: boolean = true;
   isSearchSelected: boolean = false;
@@ -42,8 +43,10 @@ export class CreateDeckComponent implements OnInit {
   selectedCards: Array<PokemonCardInterface> = [];
   pokemonCardsSearch: Array<PokemonCardInterface> | null = null;
   private storage: Storage;
-  constructor() {
+
+  constructor(private router: Router) {
     this.storage = window.localStorage;
+    this.inputName = '';
   }
 
   async ngOnInit(): Promise<void> {
@@ -73,7 +76,8 @@ export class CreateDeckComponent implements OnInit {
     this.isFetching = false;
   };
   onInputMsg = (event: KeyboardEvent) => {
-    this.inputName += (event.target as HTMLInputElement).value;
+    this.inputName = (event.target as HTMLInputElement).value;
+    console.log(this.inputName);
   };
 
   selectName = () => {
@@ -102,6 +106,7 @@ export class CreateDeckComponent implements OnInit {
       let deckObj: DeckInterface = {
         name: this.nameSelected,
         cardsList: this.selectedCards,
+        id: Date.now(),
       };
       if (decksStr) {
         let deckArr: Array<DeckInterface> = JSON.parse(decksStr);
@@ -109,6 +114,7 @@ export class CreateDeckComponent implements OnInit {
       } else {
         this.storage.setItem('decks', JSON.stringify([deckObj]));
       }
+      window.location.href = '/?q=decks';
     }
   };
 

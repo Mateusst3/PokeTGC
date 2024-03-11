@@ -1,11 +1,13 @@
-<div class="flex flex-col items-center py-3 h-auto">
+<div class="flex flex-col items-center py-3 h-auto px-3">
   <div
     class="relative"
     (mouseenter)="isHovering = true"
     (mouseleave)="isHovering = false"
   >
     @if ( isSelectCard && add2Arr ) {
-    <div class="flex flex-row items-center justify-center gap-1 absolute top-4 left-3">
+    <div
+      class="flex flex-row items-center justify-center gap-1 absolute top-4 left-3"
+    >
       <input
         type="checkbox"
         class="h-6 w-6"
@@ -17,7 +19,31 @@
       </button>
       }
     </div>
-    }
+    } @else if (isDelete && deleteItem) {
+    <div
+      class="flex flex-row items-center justify-center gap-1 absolute top-4 left-3"
+    >
+      <button (click)="deleteItem(cardData)" class="font-bold text-3xl">
+        <igx-icon class="text-pokemonRed-dark text-3xl">delete</igx-icon>
+      </button>
+    </div>
+    } @else {
+    <div
+      class="flex flex-row items-start justify-center gap-1 absolute top-4 left-3"
+    >
+      <button (click)="showArrs = !showArrs" class="font-bold text-3xl">
+        <igx-icon class="text-3xl text-white">upload</igx-icon>
+      </button>
+      @if(showArrs && this.activeArrs){
+      <div class="flex flex-col items-center justify-start bg-white rounded-xl ">
+        @for (item of this.activeArrs; track item) {
+        <button class="border bg-white hover:bg-gray-100 w-full" (click)="putCardOnDeck(item.id)">
+          <p class="w-full py-1 px-2">{{ item.name }}</p>
+        </button>
+        }
+      </div>
+      }
+    </div>
     <button
       igxButton="icon"
       class="absolute top-4 right-3"
@@ -30,10 +56,12 @@
         >favorite</igx-icon
       >
     </button>
+    }
+
     <img
       src="{{ cardData.images.small }}"
       alt="pokemon-{{ cardData.name }}"
-      class="w-auto h-auto min-h-[350px] hover:border-4 hover:border-pokemonRed-dark rounded-2xl hover:shadow-shadowCard cursor-pointer transition-all"
+      class="w-auto h-auto min-h-[350px] hover:border-4 hover:border-pokemonRed-dark rounded-2xl hover:shadow-shadowCard transition-all"
     />
   </div>
 </div>

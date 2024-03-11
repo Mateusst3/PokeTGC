@@ -1,6 +1,6 @@
 <main class="h-screen w-auto flex flex-col py-4 gap-6">
     <div
-      class="flex flex-col md:flex-row items-center justify-center text-center w-full gap-3 min-h-[200px]"
+      class="flex flex-col md:flex-row items-center justify-center text-center w-full gap-3 min-h-[500px] lg:min-h-[200px]"
     >
       <button
         (click)="changeSelectedBtn('cards')"
@@ -38,7 +38,7 @@
     </div>
     @if (pokemonCardsProp) { @if (isCardsList) {
     <div
-      class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 max-w-screen h-auto"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 max-w-screen h-auto"
     >
       @for (item of pokemonCardsProp; track item) {
       <app-pokemon-card [cardData]="item" [isSelectCard]="false"> </app-pokemon-card>

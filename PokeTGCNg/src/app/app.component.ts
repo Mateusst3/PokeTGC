@@ -11,23 +11,24 @@ import { FavoritesPokemonsComponent } from '../components/favoritesPokemonsCompo
 import { DecksComponent } from '../components/decksComponent/decks/decks.component';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
-  standalone: true,
-  imports: [
-    NavBarComponent,
-    PokemonCardComponent,
-    IgxGridModule,
-    CommonModule,
-    FavoritesPokemonsComponent,
-    IgxProgressBarModule,
-    DecksComponent,
-    RouterOutlet,
-    RouterLink,
-    RouterLinkActive,
-    RouterModule
-  ],
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss',
+    standalone: true,
+    imports: [
+        NavBarComponent,
+        PokemonCardComponent,
+        IgxGridModule,
+        CommonModule,
+        FavoritesPokemonsComponent,
+        IgxProgressBarModule,
+        DecksComponent,
+        RouterOutlet,
+        RouterLink,
+        RouterLinkActive,
+        RouterModule,
+        
+    ]
 })
 export class AppComponent implements OnInit {
   ngOnInit(): void {

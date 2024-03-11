@@ -1,5 +1,5 @@
 <div
-  class="flex flex-col items-center justify-center bg-gray-500 fixed bottom-0 px-3 py-2 rounded-t-lg"
+  class="flex flex-col items-center justify-center bg-gray-500 fixed bottom-0 right-52 px-3 py-2 rounded-t-lg"
 >
   <p
     class="uppercase text-white font-bold"
@@ -8,7 +8,7 @@
   >
     Ver cartas
   </p>
-  <div class="grid grid-cols-8">
+  <div class="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
     @if (isOpen) { @for (element of selectedCards; track element) {
     <div class="p-3">
       <div

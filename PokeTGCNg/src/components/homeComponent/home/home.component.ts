@@ -9,6 +9,7 @@ import {
   RouterLink,
   RouterLinkActive,
   RouterModule,
+  ActivatedRoute,
 } from '@angular/router';
 import { IgxGridModule, IgxProgressBarModule } from 'igniteui-angular';
 import { DecksComponent } from '../../decksComponent/decks/decks.component';
@@ -37,6 +38,25 @@ export class HomeComponent implements OnInit {
   limit: number = 30;
   isFetching = true;
 
+  
+  isCardsList = true;
+  isMyDeck = false;
+  isFavoritesPokemons = false;
+
+  queryParam: string | undefined
+  constructor(private route: ActivatedRoute){
+    this.route.queryParams.subscribe((params: any) => {
+      this.queryParam = params["q"]
+    })
+    this.getInitialOrder()
+  }
+
+  getInitialOrder = () => {
+    this.isCardsList = this.queryParam == undefined || this.queryParam == "list"
+    this.isMyDeck = this.queryParam != undefined && this.queryParam == "decks"
+    this.isFavoritesPokemons = this.queryParam != undefined && this.queryParam == "favorites"
+  }
+
   async ngOnInit(): Promise<void> {
     let dataFetched: PokemonCardsFetchDataInterface = await get(
       `cards?pageSize=${this.limit}`
@@ -55,9 +75,8 @@ export class HomeComponent implements OnInit {
     this.isFetching = false;
   };
 
-  isCardsList = true;
-  isMyDeck = false;
-  isFavoritesPokemons = false;
+
+
 
   changeSelectedBtn = (type: string) => {
     this.isCardsList = false;

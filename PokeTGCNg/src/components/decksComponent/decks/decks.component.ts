@@ -20,10 +20,6 @@ export class DecksComponent implements OnInit {
     this.decks = this.getDecks();
   }
 
-  createDeck = () => {
-
-  }
-
   getDecks = (): Array<DeckInterface> | null => {
     if (this.storage) {
       let decksStr = this.storage.getItem('decks');

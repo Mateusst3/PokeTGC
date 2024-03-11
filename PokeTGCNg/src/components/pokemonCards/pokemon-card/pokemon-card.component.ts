@@ -10,6 +10,7 @@ import { PokemonCardInterface } from '../../../types/interfaces/PokemonCardInter
 import { IgxIconComponent } from 'igniteui-angular';
 import { FavoritesCardsInterface } from '../../../types/interfaces/FavoritesCardsInterface';
 import { CommonModule } from '@angular/common';
+import { DeckInterface } from '../../../types/interfaces/DeckInterface';
 
 @Component({
   selector: 'app-pokemon-card',
@@ -22,10 +23,16 @@ export class PokemonCardComponent implements OnInit {
   private storage: Storage;
   public isFavorite: boolean;
   public isHovering: boolean = false;
-  public checked: boolean = false
+  public checked: boolean = false;
+  public showArrs: boolean = false;
+  public activeArrs: Array<DeckInterface> | undefined | null;
   @Input() isSelectCard!: boolean;
   @Input() cardData!: PokemonCardInterface;
-  @Input() add2Arr: ((args: PokemonCardInterface, isPlus: boolean) => any) | undefined;
+  @Input() add2Arr:
+    | ((args: PokemonCardInterface, isPlus: boolean) => any)
+    | undefined;
+  @Input() isDelete: boolean | undefined;
+  @Input() deleteItem: ((args: PokemonCardInterface) => any) | undefined;
   ngOnInit(): void {
     if (this.storage) {
       let favoriteItems: null | string = this.storage.getItem('favorites');
@@ -41,7 +48,16 @@ export class PokemonCardComponent implements OnInit {
   constructor() {
     this.storage = window.localStorage;
     this.isFavorite = false;
+    this.activeArrs = this.getArrs();
   }
+
+  getArrs = (): Array<DeckInterface> | null => {
+    let arrStr = this.storage.getItem('decks');
+    if (arrStr) {
+      return JSON.parse(arrStr);
+    }
+    return null;
+  };
 
   putOnFavorite = () => {
     if (this.storage) {
@@ -91,4 +107,29 @@ export class PokemonCardComponent implements OnInit {
     }
     return false;
   };
+
+  putCardOnDeck(id: number) {
+    let arrs = this.activeArrs;
+    if (arrs) {
+      let arr2put = arrs.filter((element: DeckInterface) => {
+        return element.id == id;
+      })[0];
+      if (
+        arr2put.cardsList.length + 1 <= 60 ||
+        arr2put.cardsList.filter((el: PokemonCardInterface) =>
+          el.name.includes(this.cardData.name)
+        ).length <= 3
+      ) {
+        arrs = arrs.filter((element: DeckInterface) => {
+          return element.id != arr2put.id;
+        });
+        arr2put.cardsList.push(this.cardData);
+        arrs.push(arr2put);
+        this.storage.setItem('decks', JSON.stringify(arrs));
+        window.location.href = '/?q=decks';
+      } else {
+        window.alert('Esse deck já está cheio!');
+      }
+    }
+  }
 }

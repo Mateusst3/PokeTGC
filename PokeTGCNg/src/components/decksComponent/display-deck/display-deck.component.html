@@ -1,0 +1,49 @@
+@if (deckNmb && deck) {
+<main class="w-full h-full flex flex-col items-center justify-center py-10">
+  <h3
+    class="pokemon-font-thin w-full text-center text-5xl text-pokemonBlue-main font-bold"
+  >
+    {{ deck.name }}
+    <button (click)="deleteDeck()">
+      <igx-icon
+        class="text-pokemonRed-dark hover:text-pokemonRed-light text-4xl"
+        >delete</igx-icon
+      >
+    </button>
+    <button>
+      <igx-icon
+        class="text-pokemonYellow-dark hover:text-pokemonYellow-light text-4xl"
+        (click)="isOpenNewName = !isOpenNewName"
+        >edit</igx-icon
+      >
+    </button>
+  </h3>
+  @if (isOpenNewName) {
+  <div class="flex flex-row items-center justify-center m-4">
+    <input
+      type="text"
+      placeholder="Novo nome..."
+      (change)="editName($event)"
+      class="border border-pokemonYellow-light"
+    />
+    <button (click)="changeName()">
+      <igx-icon class="text-3xl text-green-500">check</igx-icon>
+    </button>
+  </div>
+
+  }
+  <div
+    class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 max-w-screen h-auto w-full py-4"
+  >
+    @for (item of deck.cardsList; track item) {
+    <app-pokemon-card
+      [cardData]="item"
+      [isDelete]="true"
+      [deleteItem]="deleteItems"
+    >
+    </app-pokemon-card>
+    }
+  </div>
+  <app-deck-details [deckArr]="deck"></app-deck-details>
+</main>
+}

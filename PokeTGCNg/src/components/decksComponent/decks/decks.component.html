@@ -1,19 +1,43 @@
-<div class="flex flex-row items-center justify-center w-full h-full">
-  @if (decks && decks.length > 0) { @for (item of decks; track decks) {
-  <div>{{ item.name }}</div>
-  } } @else {
+<div class="flex flex-col items-center justify-center w-full h-full gap-4">
+  @if (decks && decks.length > 0) {
+  <div class="flex flex-col items-center justify-center gap-4 h-full min-h-96">
+    @for (item of decks; track decks) {
+    <a
+      class="px-5 pt-2 pb-5 border-[3px] max-h-[210px] hover:border-[6px] hover:shadow-shadowCard transition border-pokemonBlue-main rounded-[3rem] flex flex-col gap-6 items-center justify-center hover:bg-pokemonYellow-light"
+      href="/decks?deck={{ item.id }}"
+    >
+      <p
+        class="pokemon-font-thin w-full text-center text-5xl text-pokemonBlue-main font-bold"
+      >
+        {{ item.name }}
+      </p>
+      <section class="hidden md:flex flex-row items-center gap-2">
+        @for (card of item.cardsList; track $index) {
+        @if(item.cardsList.indexOf(card) < 7){
+        <img src="{{ card.images.small }}" class="h-28 w-auto" alt="" />
+        } }
+        <p
+          class="pokemon-font-thin w-full text-center text-5xl text-black font-bold flex flex-row items-end h-full mb-2"
+        >
+          ...
+        </p>
+      </section>
+    </a>
+    }
+  </div>
+  } @else {
   <div class="w-full h-full gap-10 flex flex-col items-center justify-center">
     <h3
       class="pokemon-font-thin w-full text-center text-5xl text-pokemonBlue-main font-bold"
     >
       Você ainda não tem nenhum deck!
     </h3>
-    <button
-      (click)="createDeck()"
-      class="flex items-center justify-center py-3 px-4 gap-5 text-center text-xl border-[3px] hover:border-4 hover:shadow-lg transition rounded-xl uppercase border-pokemonBlue-main text-pokemonBlue-main hover:bg-pokemonYellow-light"
-    >
-      Criar Deck!
-    </button>
   </div>
   }
+  <a
+    href="/criar"
+    class="flex items-center justify-center py-3 px-4 gap-5 text-center text-xl border-[3px] hover:border-4 hover:shadow-lg transition rounded-xl uppercase border-pokemonBlue-main text-pokemonBlue-main hover:bg-pokemonYellow-light"
+  >
+    Criar Deck!
+  </a>
 </div>

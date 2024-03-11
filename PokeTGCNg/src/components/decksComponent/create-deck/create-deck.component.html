@@ -1,10 +1,8 @@
-<main
-  class="flex flex-col items-center justiffy-center h-full w-full py-12 gap-6"
->
+<main class="flex flex-col h-full w-full py-12 gap-6">
   <section
     class="flex flex-col items-center justify-center gap-2 w-full font-semibold"
   >
-    <h4 class="text-xl pokemon-font-thin text-pokemonBlue-main">
+    <h4 class="text-xl pokemon-font-thin text-pokemonBlue-main text-center">
       Selecione o nome do seu baralho!
     </h4>
     <div class="flex flex-row gap-3 items-center justify-center">
@@ -32,8 +30,10 @@
     </div>
   </section>
   @if (nameSelected) {
-  <section class="flex flex-col items-center justify-center">
-    <h4 class="text-xl pokemon-font-thin text-pokemonBlue-main py-3">
+  <section class="flex flex-col">
+    <h4
+      class="text-xl pokemon-font-thin text-pokemonBlue-main py-3 text-center"
+    >
       Certo! Agora selecione as suas cartas!
     </h4>
     <div class="flex flex-row items-center justify-center gap-3">
@@ -54,7 +54,7 @@
 
   @if(isListSelected){
   <div
-    class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 max-w-screen h-auto"
+    class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 max-w-screen h-auto"
   >
     @for (item of pokemonCardsProp; track item) {
     <app-pokemon-card
@@ -118,7 +118,7 @@
       this.selectedCards.length > 60 ||
       !this.nameSelected
     "
-    class="flex items-center justify-center py-3 px-4 gap-5 text-center text-xl border-[3px] hover:border-4 hover:shadow-lg transition rounded-xl uppercase border-pokemonBlue-main text-pokemonBlue-main bottom-2 left-3 fixed disabled:bg-gray-300 disabled:cursor-not-allowed"
+    class="flex items-center justify-center py-3 px-4 gap-5 text-center text-xl border-[3px] hover:border-4 hover:shadow-lg transition rounded-xl uppercase bg-white border-pokemonBlue-main text-pokemonBlue-main bottom-2 left-3 fixed disabled:bg-gray-300 disabled:cursor-not-allowed"
   >
     Criar baralho
   </button>
